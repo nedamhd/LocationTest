@@ -10,7 +10,7 @@
   \item{var}{The response variable}
   \item{group}{The group variable}
   \item{Test}{You can leave the name of the test you want as NULL (or you can choose one of :t.test or wilcox or       Anova Kruskalwalis) }
-  \item{draw_plot}{TRUE or FALSE}
+  \item{draw_plot}{TRUE(if you want to draw an error bar plot) or FALSE}
   \item{filename}{This is the name of the file you want to save as}
 
 }
