@@ -11,9 +11,8 @@ T-test Analysis: The repository includes code for conducting t-tests, allowing y
 Clone or download the code from this repository to your local machine. Open the R script using your preferred R environment. Customize the code in "Location.Test" file to fit your specific data and research question.You can specify the type of analysis (t-test, ANOVA, or nonparametric test) or leave them blank.Then specify the appropriate variables." Run the code to perform the statistical tests and obtain the result.
 
 ## Installation
-``` r
+
 remotes::install_github("nedamhd/LocationTest")
-```
 
 ## Example
 
