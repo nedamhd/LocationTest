@@ -1,6 +1,6 @@
 # LocationTest
 **Authors:** [Neda Mohammadi](https://nedamohammadi.ir/)
-
+``` r
 **Description:**
 This repository hosts a collection of R code for conducting statistical analysis using t-tests, ANOVA, and nonparametric tests. The code provided checks all necessary assumptions(Normality and equality of variance) and generates informative result tables.
 
@@ -9,13 +9,13 @@ T-test Analysis: The repository includes code for conducting t-tests, allowing y
 
 **Usage:**
 Clone or download the code from this repository to your local machine. Open the R script using your preferred R environment. Customize the code in "Location.Test" file to fit your specific data and research question.You can specify the type of analysis (t-test, ANOVA, or nonparametric test) or leave them blank.Then specify the appropriate variables." Run the code to perform the statistical tests and obtain the result.
-
+``` 
 ## Installation
 ``` r
 remotes::install_github("nedamhd/LocationTest")
 ``` 
 ## Example
-
+``` r
 Data= women
 Data = rbind(Data, Data)
 Data$edu = rbinom(dim(Data)[1], 2, .4)
@@ -25,5 +25,5 @@ Data$sex = factor(Data$sex,levels = c(0,1))
 
 Location.Test(data=Data, var="height",group="edu", Test=NULL, draw_plot=TRUE, save_plot=TRUE, y_adjust=1.8,filename= "plot.123")
 
-
+``` 
 -----
