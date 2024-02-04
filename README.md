@@ -5,7 +5,7 @@
 -----
 
 ``` r
-*Description:
+ -Description :
 This repository hosts a collection of R code for conducting statistical analysis using t-tests, ANOVA, and nonparametric tests.
 The code provided checks all necessary assumptions(Normality and equality of variance) and generates informative result tables.
 
