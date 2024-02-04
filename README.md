@@ -1,5 +1,5 @@
 # LocationTest
-**Authors:** [Neda Mohammadi](https://[github.com/tlverse](https://nedamohammadi.ir/))
+**Authors:** [Neda Mohammadi](https://nedamohammadi.ir/)
 
 **Description:**
 This repository hosts a collection of R code for conducting statistical analysis using t-tests, ANOVA, and nonparametric tests. The code provided checks all necessary assumptions(Normality and equality of variance) and generates informative result tables.
