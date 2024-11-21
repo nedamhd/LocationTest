@@ -22,7 +22,8 @@ Anova.Test= function(data, var, group, Test=NULL){
           a=NormTest$p.value[i]
       }
    }else{
-     Test=summary(aov(formula, data = data))
+      Test = anova(aov(formula, data = data))$`Pr(>F)`[1]
+      Test = data.frame(p.value = Test, Test = "Anova")
    }
   }else if (!is.null(Test)){
 if(Test %in% c("Anova","ANOVA","aov","A")) Test="Anova"
