@@ -32,12 +32,11 @@ remotes::install_github("nedamhd/LocationTest")
 
 # Example
 ``` r
-Data= women
-Data = rbind(Data, Data)
-Data$edu = rbinom(dim(Data)[1], 2, .4)
-Data$sex=rbinom(dim(Data)[1],1,0.6)
-Data$edu = factor(Data$edu,levels = c(0,1,2))
-Data$sex = factor(Data$sex,levels = c(0,1))
+Data = data.frame(
+  edu = as.factor(rbinom(200, 2, .4)),
+  sex = as.factor(rbinom(200,1,0.6)),
+  height = rnorm(200,170,5)
+)
 
 Location.Test(data=Data, var="height",group="edu", Test=NULL, draw_plot=TRUE, save_plot=TRUE, y_adjust=1.8,filename= "plot.123")
 
