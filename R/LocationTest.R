@@ -1,4 +1,4 @@
-Location.Test = function (data, var, group, Test = NULL, draw_plot = TRUE, save_plot = TRUE, 
+Location.Test = function (data, var, group, Test = NULL, paired=FALSE, paired.var=NULL, draw_plot = TRUE, save_plot = TRUE, 
           y_adjust = 1.2, filename = "plot.123", ...) 
 {
   require(dplyr)
@@ -6,7 +6,7 @@ Location.Test = function (data, var, group, Test = NULL, draw_plot = TRUE, save_
   data$.group123 = data[[group]]
   uniq.level = unique(data$.group123)
   if (length(uniq.level) == 2) {
-    Test0 = Draw.table(data, var, group, Test,)
+    Test0 = Draw.table(data, var, group, Test, paired=paired, paired.var=paired.var)
   }
   if (length(uniq.level) > 2) {
     Test0 = Anova.Table(data, group, var, Test, draw_plot = draw_plot, save_plot = save_plot, 
