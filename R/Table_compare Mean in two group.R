@@ -67,7 +67,7 @@ Draw.table = function(data, var, group, Test, paired=FALSE, draw_plot=TRUE, save
   else if(!is.null(Test)){
     if (Test == "t.test") {
       group_mean = data %>%
-        group_by(data[group]) %>%
+        group_by(group) %>%
         summarise_at(vars(var), # Specify column
                      list(mean = mean, sd = sd))
       group_mean$group = c( group_mean[[group]])
