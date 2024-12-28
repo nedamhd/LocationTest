@@ -3,7 +3,7 @@ if(isFALSE(paired)){
     formula=as.formula(paste0(var,"~",group))
   R=Check_normality(data=data,var=var)
 } else {
-  paired.var = data$group[which(data$group != var)][1]
+  paired.var = as.character(data$group[which(data$group != var)][1])
   var.value = data[data$group ==var,var]
   paired.var.value = data[data$group !=var,var]
   data = data.frame(var = var.value,paired.var =paired.var.value )
