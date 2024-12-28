@@ -21,7 +21,7 @@ Location.Test = function (data, var, group=NULL, Test = NULL, paired=FALSE, pair
         var.value = data[,var[i]]
         paired.var.value = data[,paired.var[i]]
         data = data.frame(group = as.factor(c(rep(var[i], length(var.value)),
-                                              rep(paired.var[i], length(paired.var.value))
+                                              rep(as.character(paired.var[i]), length(paired.var.value))
         )), var = c(var.value, paired.var.value))
         names(data)[2]= var[i]
         group = "group"
