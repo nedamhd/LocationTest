@@ -3,8 +3,13 @@ if(isFALSE(paired)){
     formula=as.formula(paste0(var,"~",group))
   R=Check_normality(data=data,var=var)
 } else {
-  formula=as.formula(paste0("Pair(",paste0(var, collapse = ","),")~",1))
-  newdata = data.frame(diffvar = data[,var[1]] - data[,var[2]] )
+  paired.var = data$group[which(data$group != var)][1]
+  var.value = data[data$group ==var,var]
+  paired.var.value = data[data$group !=var,var]
+  data = data.frame(var = var.value,paired.var =paired.var.value )
+  names(data) = c(var,as.character(paired.var))
+  formula=as.formula(paste0("Pair(",paste0( var,",",paired.var  , collapse = ", " ),")~",1))
+  newdata = data.frame(diffvar = var.value - paired.var.value )
   R=Check_normality(data=newdata,var="diffvar")
   
 }
