@@ -1,7 +1,7 @@
 # 3- Draw table for t.Test
 
 ###### Main Func
-Draw.table = function(data, var, group,Test, draw_plot=TRUE, save_plot=TRUE, y_adjust,filename= "plot.123",...) {
+Draw.table = function(data, var, group, Test, paired=FALSE, draw_plot=TRUE, save_plot=TRUE, y_adjust,filename= "plot.123",...) {
   #functions
 
   "%r%" = function(a, b)  round(a, digits = b)
@@ -15,7 +15,7 @@ Draw.table = function(data, var, group,Test, draw_plot=TRUE, save_plot=TRUE, y_a
   # if (Test=="NULL")Test=NULL
   ress =Test_Mean(data = data,
                    var = var,
-                   group = group,Test=Test)
+                   group = group,Test=Test, paired=paired )
 
   if (is.null(Test)){
     if (ress$Test == "t.test") {
