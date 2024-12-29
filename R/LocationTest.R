@@ -18,8 +18,8 @@ Location.Test = function (data, var, group=NULL, Test = NULL, paired=FALSE, pair
         
       if(paired){ 
         if(length(var) != length(paired.var)) stop("The length of var and paired.var must be the same.")
-        var.value = data[,var[i]]
-        paired.var.value = data[,paired.var[i]]
+        var.value = data[[var[i]]]
+        paired.var.value = data[[paired.var[i]]]
         data = data.frame(group = as.factor(c(rep(var[i], length(var.value)),
                                               rep(as.character(paired.var[i]), length(paired.var.value))
         )), var = c(var.value, paired.var.value))
