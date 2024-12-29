@@ -1,7 +1,7 @@
 Test_Mean = function(data, var, group = NULL,Test=NULL, paired=FALSE){
 if(isFALSE(paired)){
     formula=as.formula(paste0(var,"~",group))
-  R=Check_normality(data=data,var=var)
+    if(is.null(Test)) R=Check_normality(data=data,var=var)
 } else {
   paired.var = as.character(data$group[which(data$group != var)][1])
   var.value = data[data$group ==var,var]
@@ -10,7 +10,7 @@ if(isFALSE(paired)){
   names(data) = c(var,as.character(paired.var))
   formula=as.formula(paste0("Pair(",paste0( var,",",paired.var  , collapse = ", " ),")~",1))
   newdata = data.frame(diffvar = var.value - paired.var.value )
-  R=Check_normality(data=newdata,var="diffvar")
+  if(is.null(Test))  R=Check_normality(data=newdata,var="diffvar")
   
 }
 
