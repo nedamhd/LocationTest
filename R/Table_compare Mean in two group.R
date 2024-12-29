@@ -11,7 +11,7 @@ Draw.table = function(data, var, group, Test, paired=FALSE, draw_plot=TRUE, save
     quantile(x, probs = c(0.25, 0.5, .75), na.rm = TRUE)
   }
   ############
-  if (!is.factor(data[,group])) stop("The group variable most be factor.")
+  # if (!is.factor(data[,group])) stop("The group variable most be factor.")
   # if (Test=="NULL")Test=NULL
   ress =Test_Mean(data = data,
                   var = var,
@@ -22,10 +22,10 @@ Draw.table = function(data, var, group, Test, paired=FALSE, draw_plot=TRUE, save
   if (is.null(Test)){
     if (ress$Test == "t.test") {
       group_mean = data %>%
-        group_by(group) %>%
+        group_by(group =(group)) %>%
         summarise_at(vars(var), # Specify column
                      list(mean = mean, sd = sd))
-      group_mean$group = c( group_mean[[group]])
+      group_mean$group = c( group_mean[["group"]])
       group_mean$lower =  group_mean$mean- group_mean$sd
       group_mean$upper =  group_mean$mean+ group_mean$sd
       group_mean$centre = group_mean$mean
@@ -49,7 +49,7 @@ Draw.table = function(data, var, group, Test, paired=FALSE, draw_plot=TRUE, save
       temp=data
       temp$group=data[[group]]
       group_median = temp %>%
-        group_by(group) %>%
+        group_by(group =(group)) %>%
         summarise_at(vars(var),
                      list (q1 = Quant1,q2 = Quant2,q3 = Quant3))
       a = group_median$q2 %+% " (" %+% (group_median$q1) %+% "," %+% (group_median$q3) %+% ")"
@@ -67,13 +67,14 @@ Draw.table = function(data, var, group, Test, paired=FALSE, draw_plot=TRUE, save
   else if(!is.null(Test)){
     if (Test == "t.test") {
       group_mean = data %>%
-        group_by(group) %>%
+        group_by(group = (group)) %>%
         summarise_at(vars(var), # Specify column
                      list(mean = mean, sd = sd))
-      group_mean$group = c( group_mean[[group]])
+      group_mean$group = c( group_mean[["group"]])
       group_mean$lower =  group_mean$mean- group_mean$sd
       group_mean$upper =  group_mean$mean+ group_mean$sd
       group_mean$centre = group_mean$mean
+      
       a = (group_mean$mean %r% 2) %+% "\u00B1" %+% (group_mean$sd %r% 2)
       table1 = list(table=cbind.data.frame(group1 = a[1], group2 = a[2], ress),
                     summary=group_mean[,c("group","lower","centre", "upper")])
@@ -95,7 +96,7 @@ Draw.table = function(data, var, group, Test, paired=FALSE, draw_plot=TRUE, save
       temp=data
       temp$group=data[[group]]
       group_median = temp %>%
-        group_by(group) %>%
+        group_by(group =(group)) %>%
         summarise_at(vars(var),
                      list (q1 = Quant1,q2 = Quant2,q3 = Quant3))
       a = group_median$q2 %+% " (" %+% (group_median$q1) %+% "," %+% (group_median$q3) %+% ")"
