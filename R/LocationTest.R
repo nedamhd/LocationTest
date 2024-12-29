@@ -1,4 +1,4 @@
-Location.Test = function (data, var, group=NULL, Test = NULL, paired=FALSE, paired.var=NULL, draw_plot = TRUE, save_plot = TRUE, 
+Location.Test = function (data, var, group=NULL,split=NULL, Test = NULL, paired=FALSE, paired.var=NULL, draw_plot = TRUE, save_plot = TRUE, 
                           y_adjust = 1.2, filename = "plot.123", ...) 
 {
   dataTemp = data
@@ -11,11 +11,20 @@ Location.Test = function (data, var, group=NULL, Test = NULL, paired=FALSE, pair
     uniq.level = 2
     
   }
-      
+  if (!is.null(split)){
+    uniq.split = unique(data[[split]])
+  }else {
+    uniq.split=1
+  }  
+    
     if (uniq.level == 2) {
       for(i in 1:length(var)){
-         data = dataTemp
+      for(j in 1:length(uniq.split)) {
+        data = dataTemp
         
+        if (!is.null(split)){
+        data=  data[data[[split]]==uniq.split[j],]
+        }
       if(paired){ 
         if(length(var) != length(paired.var)) stop("The length of var and paired.var must be the same.")
         var.value = data[[var[i]]]
@@ -28,25 +37,37 @@ Location.Test = function (data, var, group=NULL, Test = NULL, paired=FALSE, pair
         
       }
        
-        if(i == 1) {
+        if(i+j == 2) {
           Test0 = Draw.table(data, var[i], group, Test, paired=paired)
-          tab0= Test0$tab 
+          if(!is.null(split)) tab0=cbind(split=uniq.split[j], Test0$tab ) else {
+            tab0= Test0$tab}
+            if(paired){
+              tab0 = cbind(lable=paste0(var[i]," - ",paired.var[i]), tab0 ) } else {
+                tab0 = cbind(lable=paste0(var[i]), tab0 )
+             
+          }
         }
-        if(i != 1) {
+        if(i+j != 2) {
           T0 = Draw.table(data, var[i], group, Test, paired=paired)
-          tab1= T0$tab 
+          if(!is.null(split)) {tab1=cbind(split=uniq.split[j], T0$tab )} else {
+            tab1= T0$tab}
+            if(paired){
+              tab1 = cbind(lable=paste0(var[i]," - ",paired.var[i]), tab1 ) } else {
+                tab1 = cbind(lable=paste0(var[i]), tab1 )
+              
+          }
+     
           tab0 =rbind(tab0,tab1) 
           Test0=rbind(Test0,T0) 
       }
       
-      } 
-      if(paired){
-      tab0 = cbind(lable=paste0(var," - ",paired.var), tab0 ) } else {
-      tab0 = cbind(lable=paste0(var), tab0 )
-      }
-      
+       }} 
+    
+     
       Test0= list(tab = tab0, Test0)
-      }
+    }
+  
+  
     if (uniq.level > 2) {
      Test0 = Anova.Table(data, group, var, Test, draw_plot = draw_plot, save_plot = save_plot, 
                                             y_adjust = y_adjust, filename = filename, ...)   
