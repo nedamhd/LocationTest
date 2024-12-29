@@ -69,10 +69,11 @@ Location.Test = function (data, var, group=NULL,split=NULL, Test = NULL, paired=
   
   
     if (uniq.level > 2) {
-     Test0 = Anova.Table(data, group, var, Test, draw_plot = draw_plot, save_plot = save_plot, 
-                                            y_adjust = y_adjust, filename = filename, ...)   
+     # Test0 = Anova.Table(data, group, var, Test, draw_plot = draw_plot, save_plot = save_plot, 
+     #                                        y_adjust = y_adjust, filename = filename, ...)   
                         
-                        
+      Test0 <-  ANOVA_table$new(data = dataTemp, group = group,
+                              deps.quantitative = var, shapiro.t = FALSE, kruskal_wallis = FALSE  )                   
                       }
                       Test0
   }
