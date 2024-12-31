@@ -1,6 +1,7 @@
+#TODO: group must start from 1 
 
 ANOVA_table <-   R6::R6Class(
-    "ANOVA_table",
+  "ANOVA_table",
   public =  list(
     data                 = NULL,
     group                = NULL, 
@@ -171,16 +172,16 @@ ANOVA_table <-   R6::R6Class(
         #   TukeyHSD(model)[[1]][,"p adj"]  )$Letters
         l = cbind(l, label=label)
         private$result.for.plot <- rbind(private$result.for.plot, l)
-       
-         if(isFALSE(scientific.notation))
+        
+        if(isFALSE(scientific.notation))
           values2 = data.frame( t(c(
-          Factor= dep, 
-          paste0(sprintf("%.2f", round(l[,9], digits)),
-                 ' (', 
-                 sprintf("%.2f", round(l[,10], digits)), ', ',
-                 sprintf("%.2f", round(l[,11], digits)), ')',
-                 label), 
-          p.value,test = test.r)))
+            Factor= dep, 
+            paste0(sprintf("%.2f", round(l[,9], digits)),
+                   ' (', 
+                   sprintf("%.2f", round(l[,10], digits)), ', ',
+                   sprintf("%.2f", round(l[,11], digits)), ')',
+                   label), 
+            p.value,test = test.r)))
         
         
         
@@ -197,12 +198,12 @@ ANOVA_table <-   R6::R6Class(
         
         if(isFALSE(scientific.notation))
           values1 = data.frame( t(c(
-          Factor= dep, 
-          paste0(sprintf("%.2f", round(l[,4], digits)),
-                 ' \u00B1 ', 
-                 sprintf("%.2f", round(l[,5], digits)), label), 
-          p.value,test = test.r)))
-       
+            Factor= dep, 
+            paste0(sprintf("%.2f", round(l[,4], digits)),
+                   ' \u00B1 ', 
+                   sprintf("%.2f", round(l[,5], digits)), label), 
+            p.value,test = test.r)))
+        
         if(isTRUE(scientific.notation))
           values1 = data.frame( t(c(
             Factor= dep, 
@@ -210,9 +211,9 @@ ANOVA_table <-   R6::R6Class(
                    ' \u00B1 ', 
                    sprintf("%.3e", l[,5]), label), 
             p.value,test = test.r))) 
-          
-          
-          
+        
+        
+        
         values = values1
         if(test.r == "KruskalWallis")
           values = values2
