@@ -2,6 +2,7 @@ Location.Test = function (data, var, group=NULL,split=NULL, Test = NULL, paired=
                           y_adjust = 1.2, filename = "plot.123", ...) 
 {
   dataTemp = data
+  if(any(is.na(data[[group]]))) stop("group contains NA. REMOVE them.")
   require(dplyr)
   require(ggplot2)
   if(!paired){           
@@ -12,14 +13,15 @@ Location.Test = function (data, var, group=NULL,split=NULL, Test = NULL, paired=
     
   }
   if (!is.null(split)){
-    uniq.split = unique(data[[split]])
+    # uniq.split = unique(data[[split]])
+    uniq.split<- sort(unique(data[[split]]))
   }else {
     uniq.split=1
   }  
     
     if (uniq.level == 2) {
       for(i in 1:length(var)){
-      for(j in 1:length(uniq.split)) {
+        for(j in 1:length(uniq.split)) {
         data = dataTemp
         
         if (!is.null(split)){
@@ -51,8 +53,7 @@ Location.Test = function (data, var, group=NULL,split=NULL, Test = NULL, paired=
           T0 = Draw.table(data, var[i], group, Test, paired=paired)
           if(!is.null(split)) {tab1=cbind(split=uniq.split[j], T0$tab )} else {
             tab1= T0$tab}
-            if(paired){
-              tab1 = cbind(lable=paste0(var[i]," - ",paired.var[i]), tab1 ) } else {
+            if(paired){ } else {
                 tab1 = cbind(lable=paste0(var[i]), tab1 )
               
           }
