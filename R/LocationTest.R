@@ -53,7 +53,9 @@ Location.Test = function (data, var, group=NULL,split=NULL, Test = NULL, paired=
           T0 = Draw.table(data, var[i], group, Test, paired=paired)
           if(!is.null(split)) {tab1=cbind(split=uniq.split[j], T0$tab )} else {
             tab1= T0$tab}
-            if(paired){ } else {
+            if(paired){
+              tab1 = cbind(lable=paste0(var[i]," - ",paired.var[i]), tab1 )
+            } else {
                 tab1 = cbind(lable=paste0(var[i]), tab1 )
               
           }
