@@ -38,7 +38,6 @@ Anova.Table = function(data, group, var, Test = NULL,draw_plot=TRUE, save_plot=T
   letter.1 = multcompLetters(p.val)$Letters
 
 
-
   if (is.null(Test)) {
     if (res0$Test == "Anova") {
       res1 =  data %>% group_by(.group123) %>% summarise_at(vars(var), list(mean =
@@ -129,8 +128,8 @@ Anova.Table = function(data, group, var, Test = NULL,draw_plot=TRUE, save_plot=T
     }
   }
 names(summ)=c("group", "lower", "centre","upper","letter")
-if (draw_plot)  ggplot = barplotMean (summ,y_adjust=y_adjust)
-if (save_plot)  ggsave(filename=paste0(filename,".jpeg"), plot=ggplot,...)
-list(tab=tab, summary=summ, ggplot= ggplot)
+# if (draw_plot)  ggplot = barplotMean (summ,y_adjust=y_adjust)
+# if (save_plot)  ggsave(filename=paste0(filename,".jpeg"), plot=ggplot,...)
+list(tab=tab, summary=summ)
 }
 
